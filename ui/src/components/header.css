@@ -1,5 +1,4 @@
 .bg-header {
-  /* background: #ffffff; */
   background-color: #f05d5f;
   color: #ffffff;
   height: 64px;
@@ -42,9 +41,9 @@
   text-align: center;
 }
 .nav-tabs .nav-link.active {
-  border-width: 3px;
+  border-width: 1px;
 }
 .nav-tabs .nav-link:hover,
 .nav-tabs .nav-link:focus {
-  border-width: 3px;
+  border-width: 1px;
 }

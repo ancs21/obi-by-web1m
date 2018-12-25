@@ -6,9 +6,9 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem
-}
-from 'reactstrap'
+} from 'reactstrap'
 import { Link } from '@reach/router'
+import stateContext from '../state/context'
 
 import './header.css'
 
@@ -24,31 +24,46 @@ const NavLink = props => (
 )
 
 export default class Header extends React.Component {
+  static contextType = stateContext
   state = {}
 
   render() {
+    const { user } = this.context.state
+    const { loginWithGoogle, logout } = this.context.action
     return (
       <>
-      <Navbar light expand="md" className="bg-header">
+        <Navbar light expand="md" className="bg-header">
           <Link to="/" className="navbar-brand">
             Obi by Web1m
           </Link>
 
           <Nav className="ml-auto" navbar>
-            <UncontrolledDropdown nav inNavbar>
-              <DropdownToggle nav caret>
-                Account
-              </DropdownToggle>
-              <DropdownMenu right>
-                <DropdownItem>Setting</DropdownItem>
-                <DropdownItem>Billing</DropdownItem>
-                <DropdownItem divider />
-                <DropdownItem>Logout</DropdownItem>
-              </DropdownMenu>
-            </UncontrolledDropdown>
+            {!user ? (
+              <button
+                type="button"
+                className="btn btn-icon btn-primary btn-secondary"
+                onClick={loginWithGoogle}
+              >
+                <i className="fe fe-log-in mr-2" />
+                Login with Google
+              </button>
+            ) : (
+              <UncontrolledDropdown nav inNavbar>
+                <DropdownToggle nav caret>
+                  Account
+                </DropdownToggle>
+                <DropdownMenu right>
+                  <DropdownItem>Setting</DropdownItem>
+                  <DropdownItem>Billing</DropdownItem>
+                  <DropdownItem divider />
+                  <DropdownItem onClick={logout}>Logout</DropdownItem>
+                </DropdownMenu>
+              </UncontrolledDropdown>
+            )}
           </Nav>
-        </Navbar> <div className = "row align-items-center header-item" >
-      <div className="col-lg order-lg-first">
+        </Navbar>
+        <div className="row align-items-center header-item">
+          <div className="col-lg order-lg-first">
             <ul className="nav nav-tabs border-0 flex-column">
               <li className="nav-item">
                 <NavLink to="/welcome">Welcome</NavLink>
@@ -67,7 +82,8 @@ export default class Header extends React.Component {
                 <NavLink to="/serving">Model API</NavLink>
               </li>
             </ul>
-          </div> </div>
+          </div>{' '}
+        </div>
       </>
     )
   }
