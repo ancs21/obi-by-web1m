@@ -8,7 +8,7 @@ import stateContext from './state/context'
 import Index from './pages/index'
 import Dataset from './pages/dataset'
 import Model from './pages/model'
-import ServerApi from './pages/server-api'
+import Serving from './pages/serving'
 import Train from './pages/train'
 import Welcome from './pages/welcome'
 
@@ -23,17 +23,17 @@ class App extends Component {
   }
   render() {
     return (
-      <>
+      <React.Fragment>
         <Header />
         <Router>
           <Index path="/" />
           <Dataset path="dataset" />
           <Model path="model" />
-          <ServerApi path="server-api" />
+          <Serving path="serving" />
           <Train path="train" />
           <Welcome path="welcome" />
         </Router>
-      </>
+      </React.Fragment>
     )
   }
 }

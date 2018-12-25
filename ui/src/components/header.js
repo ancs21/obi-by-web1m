@@ -6,7 +6,8 @@ import {
   DropdownToggle,
   DropdownMenu,
   DropdownItem
-} from 'reactstrap'
+}
+from 'reactstrap'
 import { Link } from '@reach/router'
 
 import './header.css'
@@ -28,7 +29,7 @@ export default class Header extends React.Component {
   render() {
     return (
       <>
-        <Navbar light expand="md" className="bg-header">
+      <Navbar light expand="md" className="bg-header">
           <Link to="/" className="navbar-brand">
             Obi by Web1m
           </Link>
@@ -46,9 +47,8 @@ export default class Header extends React.Component {
               </DropdownMenu>
             </UncontrolledDropdown>
           </Nav>
-        </Navbar>
-        <div className="row align-items-center header-item">
-          <div className="col-lg order-lg-first">
+        </Navbar> <div className = "row align-items-center header-item" >
+      <div className="col-lg order-lg-first">
             <ul className="nav nav-tabs border-0 flex-column">
               <li className="nav-item">
                 <NavLink to="/welcome">Welcome</NavLink>
@@ -64,11 +64,10 @@ export default class Header extends React.Component {
                 <NavLink to="/model">Model</NavLink>
               </li>
               <li className="nav-item dropdown">
-                <NavLink to="/server-api">Server Api</NavLink>
+                <NavLink to="/serving">Model API</NavLink>
               </li>
             </ul>
-          </div>
-        </div>
+          </div> </div>
       </>
     )
   }
