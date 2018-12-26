@@ -1,9 +1,54 @@
 import React, { Component } from 'react'
+import firebase from '../utils/fb'
 
 class Dataset extends Component {
+  state = {
+    lenFiles: null,
+    count: null
+  }
+
+  handleFile = async e => {
+    let filesList = []
+    const files = Array.from(e.target.files)
+    this.setState({
+      lenFiles: files.length,
+      count: 0
+    })
+    await files.map(async file => {
+      const storageRef = firebase.storage().ref()
+      await storageRef
+        .child(`ancs/catod/${file.name}`)
+        .put(file)
+        .then(result => {
+          const { contentType, size, name, updated } = result.metadata
+          filesList.push({
+            name: name,
+            type: contentType,
+            size: size,
+            date: updated
+          })
+          this.setState({
+            count: this.state.count + 1
+          })
+        })
+        .catch(err => {
+          console.log(err)
+        })
+    })
+  }
   render() {
     return (
       <div className="container mt-6 mb-6">
+        {this.state.lenFiles > 0 && (
+          <div
+            className="alert alert-info"
+            style={{ textAlign: 'center' }}
+            role="alert"
+          >
+            Do not close the tab. Uploading {this.state.count}/
+            {this.state.lenFiles}
+          </div>
+        )}
         <div className="card">
           <div className="card-header">
             <h2 className="card-title">Dataset</h2>
@@ -19,10 +64,11 @@ class Dataset extends Component {
                   placeholder="Search file"
                 />
               </div>
-              <button type="button" className="btn btn-dark">
+              <span className="btn btn-default btn-file btn-dark">
+                <input onChange={this.handleFile} type="file" multiple />
                 <i className="fe fe-upload mr-2" />
                 Upload file
-              </button>
+              </span>
             </div>
           </div>
 
@@ -38,24 +84,6 @@ class Dataset extends Component {
                 </tr>
               </thead>
               <tbody>
-                <tr>
-                  <td>1.jpg</td>
-                  <td>300 kb</td>
-                  <td>image/jpeg</td>
-                  <td colSpan="2">
-                    <div className="progress progress-xs">
-                      <div
-                        className="progress-bar bg-green"
-                        role="progressbar"
-                        style={{ width: '80%' }}
-                        aria-valuenow="80"
-                        aria-valuemin="0"
-                        aria-valuemax="100"
-                      />
-                    </div>
-                  </td>
-                </tr>
-
                 <tr>
                   <td>1.jpg</td>
                   <td>300 kb</td>
