@@ -5,10 +5,14 @@
   "dependencies": {
     "@reach/router": "^1.2.1",
     "firebase": "^5.7.1",
+    "formik": "^1.4.1",
     "react": "^16.7.0",
     "react-dom": "^16.7.0",
     "react-scripts": "2.1.2",
-    "reactstrap": "^6.5.0"
+    "reactstrap": "^6.5.0",
+    "rxfire": "^3.2.1",
+    "rxjs": "^6.3.3",
+    "uuid": "^3.3.2"
   },
   "scripts": {
     "start": "react-scripts start",

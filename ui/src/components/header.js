@@ -12,17 +12,6 @@ import stateContext from '../state/context'
 
 import './header.css'
 
-const NavLink = props => (
-  <Link
-    {...props}
-    getProps={({ isCurrent }) => {
-      return {
-        className: isCurrent ? 'nav-link active' : 'nav-link'
-      }
-    }}
-  />
-)
-
 export default class Header extends React.Component {
   static contextType = stateContext
   state = {}
@@ -62,28 +51,6 @@ export default class Header extends React.Component {
             )}
           </Nav>
         </Navbar>
-        <div className="row align-items-center header-item">
-          <div className="col-lg order-lg-first">
-            <ul className="nav nav-tabs border-0 flex-column">
-              <li className="nav-item">
-                <NavLink to="/welcome">Welcome</NavLink>
-              </li>
-
-              <li className="nav-item dropdown">
-                <NavLink to="/dataset">Dataset</NavLink>
-              </li>
-              <li className="nav-item dropdown">
-                <NavLink to="/train">Train</NavLink>
-              </li>
-              <li className="nav-item dropdown">
-                <NavLink to="/model">Model</NavLink>
-              </li>
-              <li className="nav-item dropdown">
-                <NavLink to="/serving">Model API</NavLink>
-              </li>
-            </ul>
-          </div>{' '}
-        </div>
       </>
     )
   }

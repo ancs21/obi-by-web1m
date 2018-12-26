@@ -1,6 +1,7 @@
 import firebase from '@firebase/app'
 import '@firebase/storage'
 import '@firebase/auth'
+import '@firebase/firestore'
 
 const config = {
   apiKey: 'AIzaSyA-D0Ey8eWujtqTEmBPbvE1IoXodvQtrRg',
@@ -11,5 +12,7 @@ const config = {
   messagingSenderId: '306448410357'
 }
 firebase.initializeApp(config)
-
+const firestore = firebase.firestore()
+const settings = { timestampsInSnapshots: true }
+firestore.settings(settings)
 export default firebase

@@ -34,3 +34,13 @@ code {
   cursor: inherit;
   display: block;
 }
+
+.project-card a {
+  color: black !important;
+}
+
+.project-card a:hover,
+.project-card a:focus,
+.project-card a:active {
+  text-decoration: none !important;
+}

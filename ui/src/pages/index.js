@@ -1,13 +1,16 @@
 import React, { Component } from 'react'
+
 import stateContext from '../state/context'
+import NewProject from '../components/newproject'
+import { Link } from '@reach/router'
 
 class Index extends Component {
   static contextType = stateContext
 
   state = {}
-  render() {
-    const { user } = this.context.state
 
+  render() {
+    const { user, projects } = this.context.state
     return (
       <>
         {user && (
@@ -18,26 +21,39 @@ class Index extends Component {
                 style={{ backgroundImage: `url(${user.photoURL})` }}
               />
               <h2> Welcome, {user.displayName}</h2>
+              <NewProject />
             </div>
 
             <div className="row row-cards">
-              <div className="col-sm-6 col-xl-4">
-                <div className="card">
-                  <div className="card-header">
-                    <h3 className="card-title">People counter</h3>
-                    <div className="card-options">
-                      <button className="btn btn-secondary btn-sm ml-2">
-                        Edit
-                      </button>
-                    </div>
+              {projects.length > 0 &&
+                projects.map(project => (
+                  <div
+                    className="col-sm-6 col-xl-4 project-card"
+                    key={project.id}
+                  >
+                    <Link
+                      onClick={() =>
+                        this.context.action.addProjectIdClicked(project.id)
+                      }
+                      to={`projects/${project.id}`}
+                    >
+                      <div className="card">
+                        <div className="card-header">
+                          <h3 className="card-title">{project.name}</h3>
+                          <div className="card-options">
+                            <button className="btn btn-secondary btn-sm ml-2">
+                              Edit
+                            </button>
+                          </div>
+                        </div>
+                        <div className="card-body">{project.description}</div>
+                        <div className="card-footer">Get started</div>
+                      </div>
+                    </Link>
                   </div>
-                  <div className="card-body">
-                    Lorem ipsum dolor sit amet, consectetur adipisicing elit.
-                    Aperiam deleniti fugit incidunt, iste, itaque minima neque
-                  </div>
-                  <div className="card-footer">Get started</div>
-                </div>
-              </div>
+                ))}
+
+              <div className="col-sm-6 col-xl-4" />
             </div>
           </div>
         )}

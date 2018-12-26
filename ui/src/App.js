@@ -27,11 +27,11 @@ class App extends Component {
         <Header />
         <Router>
           <Index path="/" />
-          <Dataset path="dataset" />
-          <Model path="model" />
-          <Serving path="serving" />
-          <Train path="train" />
-          <Welcome path="welcome" />
+          <Dataset path="/projects/:id/dataset" />
+          <Model path="/projects/:id/model" />
+          <Serving path="/projects/:id/serving" />
+          <Train path="/projects/:id/train" />
+          <Welcome path="/projects/:id" />
         </Router>
       </React.Fragment>
     )

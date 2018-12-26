@@ -1,12 +1,16 @@
 import React from 'react'
 import stateContext from './context'
 import firebase from '../utils/fb'
+import { collectionData } from 'rxfire/firestore'
+import { tap } from 'rxjs/operators'
 
 export const stateConsumer = stateContext.Consumer
 
 class StateProvider extends React.Component {
   state = {
-    user: null
+    user: null,
+    projects: [],
+    projectIdClicked: null
   }
 
   componentDidMount() {
@@ -15,6 +19,19 @@ class StateProvider extends React.Component {
         this.setState({
           user
         })
+        const projectsRef = firebase
+          .firestore()
+          .collection('users')
+          .doc(user.uid)
+          .collection('projects')
+
+        collectionData(projectsRef, 'id')
+          .pipe(tap(projects => console.log('Connect db success!')))
+          .subscribe(projects => {
+            this.setState({
+              projects
+            })
+          })
       } else {
         // No user is signed in.
       }
@@ -37,6 +54,12 @@ class StateProvider extends React.Component {
       })
   }
 
+  addProjectIdClicked = projectId => {
+    this.setState({
+      projectIdClicked: projectId
+    })
+  }
+
   logout = () => {
     firebase
       .auth()
@@ -51,16 +74,19 @@ class StateProvider extends React.Component {
       })
   }
   render() {
-    const { user } = this.state
+    const { user, projects, projectIdClicked } = this.state
     return (
       <stateContext.Provider
         value={{
           state: {
-            user
+            user,
+            projects,
+            projectIdClicked
           },
           action: {
             loginWithGoogle: this.loginWithGoogle,
-            logout: this.logout
+            logout: this.logout,
+            addProjectIdClicked: this.addProjectIdClicked
           }
         }}
       >
