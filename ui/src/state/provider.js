@@ -9,8 +9,7 @@ export const stateConsumer = stateContext.Consumer
 class StateProvider extends React.Component {
   state = {
     user: null,
-    projects: [],
-    projectIdClicked: null
+    projects: []
   }
 
   componentDidMount() {
@@ -54,12 +53,6 @@ class StateProvider extends React.Component {
       })
   }
 
-  addProjectIdClicked = projectId => {
-    this.setState({
-      projectIdClicked: projectId
-    })
-  }
-
   logout = () => {
     firebase
       .auth()
@@ -73,6 +66,7 @@ class StateProvider extends React.Component {
         console.log(error)
       })
   }
+
   render() {
     const { user, projects, projectIdClicked } = this.state
     return (

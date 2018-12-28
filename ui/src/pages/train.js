@@ -6,7 +6,7 @@ class Train extends Component {
   render() {
     return (
       <>
-        <NavLinkHead />
+        <NavLinkHead id={this.props.id} />
         <h1>Train</h1>
       </>
     )

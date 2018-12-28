@@ -6,7 +6,7 @@ class Serving extends Component {
   render() {
     return (
       <>
-        <NavLinkHead />
+        <NavLinkHead id={this.props.id} />
         <h1>Model API</h1>
       </>
     )

@@ -6,7 +6,7 @@ class Model extends Component {
   render() {
     return (
       <>
-        <NavLinkHead />
+        <NavLinkHead id={this.props.id} />
         <h1>Model</h1>
       </>
     )

@@ -31,12 +31,7 @@ class Index extends Component {
                     className="col-sm-6 col-xl-4 project-card"
                     key={project.id}
                   >
-                    <Link
-                      onClick={() =>
-                        this.context.action.addProjectIdClicked(project.id)
-                      }
-                      to={`projects/${project.id}`}
-                    >
+                    <Link to={`projects/${project.id}`}>
                       <div className="card">
                         <div className="card-header">
                           <h3 className="card-title">{project.name}</h3>
